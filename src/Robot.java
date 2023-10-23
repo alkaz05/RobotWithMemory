@@ -40,6 +40,29 @@ public class Robot {
             case 'Ю': x--;    break;
             case 'В': y++;    break;
         }
-        memory.add(new Position(x, y));
+        //memory.add(new Position(x, y));
+    }
+
+    public int runProgram(String program)
+    {
+        int counter = 0;
+        for (int i = 0; i < program.length(); i++) {
+            char c = program.charAt(i);
+            if(c == 'L')
+                this.turnLeft();
+            if(c == 'R')
+                this.turnRight();
+            if(c == 'S')
+            {
+                counter++;
+                this.stepForward();
+                if(this.memory.contains(new Position(x, y)))
+                    //System.out.println("я здесь уже был");
+                    return counter;
+                else
+                    memory.add(new Position(x, y));
+            }
+        }
+        return -1;
     }
 }
